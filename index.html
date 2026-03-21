@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Onboarding & Flow Navigator</title>
+    <meta name="description"
+        content="Interactive user manual and onboarding tool for exploring operational flowcharts.">
+    <!-- Google Fonts for Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>Flow Navigator</h2>
+                <button id="toggle-sidebar" class="icon-btn" aria-label="Toggle Sidebar">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <!-- Category 1: User Flows -->
+                <details class="nav-category" id="user-flows-section" open>
+                    <summary class="nav-category-header">User Flows</summary>
+                    <ul class="nav-list" id="user-flows-list">
+                        <li class="nav-item" data-flow="Athlete Dashboard & Flow" data-img="ATHLETE.drawio.png"
+                            data-desc="desc-athlete-dashboard-flow">Athlete </li>
+                        <li class="nav-item" data-flow="Intern Dashboard & Flow" data-img="INTERN.drawio.png"
+                            data-desc="desc-intern-dashboard-flow">Intern</li>
+                        <li class="nav-item" data-flow="College Dashboard & Flow" data-img="college.drawio (1).png">
+                            College </li>
+                    </ul>
+                </details>
+
+                <!-- Category 2: Feeder Flows -->
+                <details class="nav-category" id="feeder-flows-section" open>
+                    <summary class="nav-category-header">Feeder Flows</summary>
+                    <ul class="nav-list" id="feeder-flows-list">
+                        <li class="nav-item" data-flow="Registration & Walk-in Flow" data-img="registration.drawio.png"
+                            data-desc="desc-registration-flow">Registration </li>
+                        <li class="nav-item" data-flow="Front Desk Operations" data-img="FRONT.drawio.png"
+                            data-desc="desc-frontdesk-flow">Front Desk </li>
+                        <li class="nav-item" data-flow="Scheduler & Attendance Module" data-img="sche.drawio (1).png"
+                            data-desc="desc-scheduler-flow">Scheduler </li>
+                        <li class="nav-item" data-flow="Specialists & Mentors Flow" data-img="SPECLAITSTS.drawio.png"
+                            data-desc="desc-specialists-flow">Specialists </li>
+                        <li class="nav-item" data-flow="HOD Flow" data-img="hod.drawio (1) (1).png"
+                            data-desc="desc-hod-flow">HOD </li>
+                        <li class="nav-item" data-flow="Intern Co-ordinator Flow"
+                            data-img="INTERN CO-ORDINATOR.drawio.png" data-desc="desc-intern-coordinator-flow">Intern
+                            Co-ordinator </li>
+                        <li class="nav-item" data-flow="IT Department & Support Flow" data-img="IT.drawio (1).png"
+                            data-desc="desc-it-department-flow">IT Department </li>
+
+
+                    </ul>
+                </details>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="footer-tab active" data-target="user-flows-section">User Flows</button>
+                <button class="footer-tab" data-target="feeder-flows-section">Feeder Flows</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-header">
+                <h1 id="current-flow-title">Athlete Dashboard & Flow</h1>
+                <div class="header-actions">
+                    <div class="tooltip-container">
+                        <button class="icon-btn help-btn" aria-label="Help">
+                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                        </button>
+                        <div class="tooltip">Use your mouse wheel to zoom, and click/drag to pan across the flowchart.
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Viewer Area -->
+            <div class="viewer-area" id="viewer-area">
+                <div class="pan-wrapper" id="pan-wrapper">
+                    <!-- Viewer Controls -->
+                    <div class="viewer-controls">
+                        <button class="control-btn" id="btn-zoom-in" aria-label="Zoom In" title="Zoom In">
+                            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                <line x1="11" y1="8" x2="11" y2="14"></line>
+                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                            </svg>
+                        </button>
+                        <button class="control-btn" id="btn-zoom-out" aria-label="Zoom Out" title="Zoom Out">
+                            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                            </svg>
+                        </button>
+                        <button class="control-btn" id="btn-reset" aria-label="Reset View" title="Reset View">
+                            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                <polyline points="3 3 3 8 8 8"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="pan-container" id="pan-container">
+                        <img id="flowchart-image" src="ATHLETE.drawio.png" alt="Detailed Flowchart" draggable="false">
+                    </div>
+                </div>
+
+                <div id="flow-description" class="flow-description" style="display: none;"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Hidden Descriptions -->
+    <div id="hidden-descriptions" style="display: none;">
+        <div id="desc-hod-flow">
+            <h3>HOD FLOW</h3>
+
+            <h4>1. Executive Summary</h4>
+            <p>The HOD Module serves as a high-level managerial and clinical oversight hub. A Head of Department uses
+                this portal to manage their specific clinical team, route incoming patient requests, oversee
+                departmental schedules, review performance reports, and track their own daily attendance.</p>
+
+            <h4>2. Phase 1: Departmental Oversight & Reporting</h4>
+            <p>The HOD operates as the leader for a specific clinical or scientific vertical. From their central
+                dashboard, they have direct access to oversee operations within the following Departments:</p>
+            <ul>
+                <li>Sports Engine</li>
+                <li>Physiotherapy</li>
+                <li>Psychology</li>
+                <li>Physiology</li>
+                <li>Nutrition</li>
+            </ul>
+            <p>In addition to overseeing their specific department, the HOD has high-level administrative access to two
+                key data streams:</p>
+            <ul>
+                <li><strong>Interns:</strong> Direct visibility into the intern cohort assigned to their department.
+                </li>
+                <li><strong>Reports View / Edit:</strong> Access to vital clinical and operational reports, with
+                    permissions to both view and edit the data as required for departmental management.</li>
+            </ul>
+
+            <h4>3. Phase 2: Clinical Dashboard (Patient Routing & Management)</h4>
+            <p>The HOD plays a critical role in managing the intake and flow of clients through their department using
+                the Clinical Dashboard.</p>
+            <ul>
+                <li><strong>Request Management & Assignment:</strong> The HOD receives incoming Requests from various
+                    user types (Athletes, Visitors, Members).</li>
+                <li>After reviewing the request, the HOD executes the critical action of Assign to the specialists,
+                    routing the client to the appropriate professional within their department.</li>
+                <li><strong>Appointment Administration:</strong> The HOD retains high-level administrative control over
+                    the department's booking queue, with the authority to directly Cancel Appointment or Reschedule
+                    Appointment as operational needs or specialist availability dictates.</li>
+            </ul>
+
+            <h4>4. Phase 3: Scheduler & Calendar Oversight</h4>
+            <p>To effectively manage their team and their own clinical load, the HOD integrates deeply with the
+                Scheduler module.</p>
+            <p><strong>Dual-View Calendar:</strong> The HOD accesses a centralized Calendar that aggregates two distinct
+                data feeds:</p>
+            <ul>
+                <li><strong>HOD Scheduled Appointments for the day:</strong> Their personal clinical or administrative
+                    appointments.</li>
+                <li><strong>Schedule of the specialist under them:</strong> A macro-view of the daily schedules of all
+                    specialists operating within their specific department. This allows the HOD to monitor workload,
+                    availability, and clinical throughput.</li>
+            </ul>
+
+            <h4>5. Phase 4: Daily Attendance Tracking</h4>
+            <p>Like all staff within the facility, the HOD must log their daily status via the Attendance Module. This
+                begins with the IF IN OFFICE decision node:</p>
+
+            <p><strong>Scenario A: On-Site (YES)</strong></p>
+            <ul>
+                <li>The HOD is directed to Marks In Office.</li>
+                <li>They must Select Location to specify where they are operating within the facility that day.</li>
+                <li>This action marks them as active. At the conclusion of their shift, they trigger the Mark End of Day
+                    command.</li>
+            </ul>
+
+            <p><strong>Scenario B: Off-Site / Leave (NO)</strong></p>
+            <ul>
+                <li>The system routes them to Out of Office.</li>
+                <li>To successfully log this status, the HOD must input a specific Reason and their current Location.
+                </li>
+                <li>They conclude their status by triggering Mark End of Day.</li>
+            </ul>
+        </div>
+
+        <div id="desc-specialists-flow">
+            <h3>SPECIALISTS & MENTORS FLOW</h3>
+
+            <div class="module-tabs" style="margin-top: 1rem;">
+                <button class="module-tab active" data-img="SPECLAITSTS.drawio.png"
+                    data-target="specialist-main">SPECIALIST FLOW</button>
+                <button class="module-tab" data-img="frontdesk/DEPARTMENT.drawio.png"
+                    data-target="specialist-dept">DEPARTMENT</button>
+                <button class="module-tab" data-img="mentors module/interns list .png"
+                    data-target="specialist-mentors">MENTORS MODULE</button>
+                <button class="module-tab" data-img="counselor/counsellor dashboard.png"
+                    data-target="specialist-counsellor">COUNSELLOR MODULE</button>
+                <button class="module-tab" data-img="feeder- scheduler/scheduler module - specilaits .png"
+                    data-target="specialist-scheduler">SPECIALIST SCHEDULER</button>
+            </div>
+
+            <div id="specialist-main" class="module-tab-content active">
+                <h4>1. Executive Summary</h4>
+                <p>The Specialists Module governs the lifecycle and daily operations of clinical and coaching
+                    professionals within the system. It tracks their onboarding, manages their daily physical
+                    attendance, aggregates their availability into the central Scheduler, and dictates how different
+                    client types (New, Interns, Existing Athletes) are routed to them based on real-time availability.
+                </p>
+
+                <h4>2. Phase 1: Specialist Onboarding & Access</h4>
+                <p>Before a Specialist can interact with clients, they must go through a formal system onboarding
+                    process.</p>
+
+                <p><strong>Registration & Document Verification:</strong></p>
+                <ul>
+                    <li>A new specialist enters the system via the REGISTER node.</li>
+                    <li>They are required to complete a DOCUMENT UPLOAD step (providing credentials, certifications,
+                        etc.).</li>
+                    <li>The system routes these documents for VERIFICATION.</li>
+                </ul>
+
+                <p><strong>IT Integration:</strong></p>
+                <ul>
+                    <li>Once verified, IT SUPPORT takes over to formally ONBOARD THE SPECIALISTS into the backend.</li>
+                </ul>
+
+                <p><strong>Credential Generation & Access:</strong></p>
+                <ul>
+                    <li>An automated action triggers, and Login Credentials are sent to the mail (highlighted as a
+                        critical system action).</li>
+                    <li>Using these credentials, the specialist can now ACCESS THEIR DASHBOARD, allowing them to
+                        interact with the rest of the system's modules.</li>
+                </ul>
+
+                <h4>3. Phase 2: Daily Attendance & Availability Tracking</h4>
+                <p>The Specialist dashboard integrates directly with the ATTENDANCE MODULE to determine their daily
+                    availability for appointments. Every day begins with an IF IN OFFICE decision node:</p>
+
+                <p><strong>Scenario A: On-Site (YES)</strong></p>
+                <ul>
+                    <li>The system directs the specialist to MARKS IN OFFICE.</li>
+                    <li>They must SELECT LOCATION (specifying their desk, lab, or clinical room).</li>
+                    <li>This action immediately flags their profile as "Active" and pushes their availability to the
+                        central SCHEDULER. (This same "In Office" rule applies to Mentors and Counsellors).</li>
+                    <li>At the end of their shift, they trigger MARK END OF DAY.</li>
+                </ul>
+
+                <p><strong>Scenario B: Off-Site / Leave (NO)</strong></p>
+                <ul>
+                    <li>The system routes them to OUT OF OFFICE.</li>
+                    <li>They must provide a REASON and their current LOCATION.</li>
+                    <li>They remain inactive in the live booking Scheduler for that day.</li>
+                    <li>They conclude their status by triggering MARK END OF DAY.</li>
+                </ul>
+
+                <h4>4. Phase 3: The Scheduler Engine (Input Aggregation)</h4>
+                <p>The SCHEDULER acts as the central brain of this flow, aggregating availability and obligations from
+                    multiple sources:</p>
+                <ul>
+                    <li><strong>Live Staff Availability:</strong> It pulls the "In Office" status of MENTORS,
+                        COUNSELLORS, and SPECIALISTS.</li>
+                    <li><strong>Mentor Schedule Feed:</strong> It integrates the MENTOR SCHEDULE, which is pre-populated
+                        by three specific administrative inputs:
+                        <ul>
+                            <li>INTERN EVALUATION</li>
+                            <li>INTERN ASSESSMENTS</li>
+                            <li>CLASSES</li>
+                        </ul>
+                    </li>
+                    <li><strong>Counsellor Feed:</strong> Direct inputs from Counsellor schedules.</li>
+                </ul>
+
+                <h4>5. Phase 4: Client Routing & Appointment Handling</h4>
+                <p>When a booking request hits the Scheduler, the system evaluates the IF AVAILABLE SPECIALISTS decision
+                    node. Based on availability and the user's profile type, the system executes targeted routing:</p>
+
+                <p><strong>Standard Routing Paths (Available):</strong></p>
+                <ul>
+                    <li><strong>NEW REGISTER:</strong> Newly registered users are automatically routed to a COUNSELLOR
+                        for initial intake and package assignment.</li>
+                    <li><strong>INTERN:</strong> Interns are strictly routed to a MENTOR for their evaluations,
+                        assessments, and scheduled classes.</li>
+                    <li><strong>EXISTING ATHLETE:</strong> Returning clients with active plans are routed directly to
+                        the appropriate SPECIALISTS for their treatment or training sessions.</li>
+                </ul>
+
+                <p><strong>Exception Handling (Sudden Unavailability):</strong></p>
+                <ul>
+                    <li>If an assigned specialist becomes unexpectedly unavailable (e.g., medical emergency, abrupt
+                        out-of-office status), the system triggers the SUDDEN UNAVAILABILITY protocol.</li>
+                    <li>The system executes a TRANSFER TO OTHER SPECIALISTS command, reassigning the athlete's slot to
+                        the next available professional with matching qualifications to ensure service continuity.</li>
+                </ul>
+
+                <h4>6. Sidebar Navigation (Quick Access)</h4>
+                <p>Throughout this flow, the user interface provides a persistent left-hand menu for quick navigation
+                    between core modules:</p>
+                <ul>
+                    <li><strong>SPECIALISTS:</strong> Returns to the main specialist dashboard.</li>
+                    <li><strong>MENTOR:</strong> Access to intern-related schedules and assessments.</li>
+                    <li><strong>COUNSELLOR:</strong> Access to new intake profiles.</li>
+                    <li><strong>ATTENDANCE:</strong> Direct link to the clock-in/out module.</li>
+                    <li><strong>VIEW/EDIT REPORT:</strong> Access to clinical, daily, or system reports based on the
+                        specialist's granted edit permissions.</li>
+                </ul>
+            </div>
+
+            <div id="specialist-dept" class="module-tab-content" style="display: none;">
+                <h4 style="margin-top: 1rem; color: var(--text-primary);">DEPARTMENT FLOW</h4>
+
+                <h5 style="margin-top: 1rem; color: var(--text-primary);">Physiotherapy Flow</h5>
+                <p>The athlete enters through registration and is assigned to a counsellor. After counselling and
+                    referral, the athlete is directed to Physiotherapy.</p>
+                <p>The process begins with assessment and clinical diagnosis, followed by goal setting, treatment
+                    planning, and financial discussion with consent. Once confirmed, the treatment phase begins.</p>
+                <p>The athlete undergoes regular therapy sessions with continuous progress tracking and weekly logs.
+                    Testing may be conducted to evaluate improvement. Based on progress, a decision is made whether to
+                    continue sessions or proceed toward return to sport.</p>
+                <p>If recovery is achieved, the athlete transitions to return to sport, followed by a follow-up and
+                    retention phase to ensure long-term recovery.</p>
+
+                <h5 style="margin-top: 1.5rem; color: var(--text-primary);">Strength &amp; Conditioning (S&amp;C) Flow
+                </h5>
+                <p>After counselling and referral, the athlete is directed to the Strength &amp; Conditioning
+                    department.</p>
+                <p>The process starts with athlete information, followed by selecting the training type such as
+                    strength, power, agility, speed, endurance, or recovery. Training session details including
+                    duration, intensity, and session RPE are recorded.</p>
+                <p>Performance metrics are then captured, including strength data, endurance data, and speed/power
+                    metrics. Recovery status is monitored based on factors like fatigue and muscle soreness.</p>
+                <p>Coach notes are added, and all data is saved to the athlete monitoring database. This data is then
+                    reflected in the performance dashboard for the coach, completing the training cycle.</p>
+
+                <h5 style="margin-top: 1.5rem; color: var(--text-primary);">Sports Science Flow</h5>
+                <p>After referral, if testing is required, the athlete is directed to the Sports Science department.</p>
+                <p>An appointment is scheduled, and testing is conducted over one or more days depending on the number
+                    of tests. These tests include multiple performance and health assessments based on the athlete’s
+                    sport.</p>
+                <p>Testing records are entered and saved, followed by data analysis and interpretation by the sports
+                    scientist. Based on the findings, reports are generated.</p>
+                <p>These reports are discussed with relevant departments such as S&amp;C and Physiotherapy. Multiple
+                    versions of reports are shared with stakeholders including the athlete, parents, specialists, and
+                    coaches.</p>
+                <p>Finally, the athlete proceeds to the appropriate program, such as Physiotherapy or S&amp;C,
+                    completing the process.</p>
+            </div>
+
+            <div id="specialist-mentors" class="module-tab-content" style="display: none;">
+                <h4 style="margin-top: 1rem; color: var(--text-primary);">MENTORS MODULES</h4>
+                <div class="module-tabs">
+                    <button class="module-tab active" data-img="mentors module/interns list .png"
+                        data-target="sm-mentors-interns-text">Interns List</button>
+                    <button class="module-tab" data-img="mentors module/assements .png"
+                        data-target="sm-mentors-assessments-text">Assessments</button>
+                </div>
+
+                <div id="sm-mentors-interns-text" class="module-tab-content active">
+                    <p><strong>Interns list :-</strong></p>
+                    <p>This tab displays the list of all interns assigned to the mentor.<br>
+                        The mentor can view details such as the intern’s name, batch, college, and current assessment
+                        status.</p>
+                    <p>Each intern has multiple assessment options (e.g., Sports Science, Sports Physio, Clinical
+                        Physio, Strength & Conditioning).<br>
+                        By clicking on any of these assessment buttons, the mentor can open the evaluation form for that
+                        specific domain.</p>
+                </div>
+
+                <div id="sm-mentors-assessments-text" class="module-tab-content" style="display: none;">
+                    <p><strong>Assessments :-</strong></p>
+                    <p>This tab allows the mentor to evaluate an intern’s performance in a specific domain.<br>
+                        The mentor can rate the intern’s skills (e.g., professionalism, communication, proactiveness,
+                        responsibility) on a defined scale (1–5).</p>
+                    <p>The mentor selects the week, date, and relevant department, then provides ratings based on the
+                        intern’s performance in that particular domain.</p>
+                </div>
+            </div>
+
+            <div id="specialist-counsellor" class="module-tab-content" style="display: none;">
+                <h4 style="margin-top: 1rem; color: var(--text-primary);">COUNSELLOR ROLE</h4>
+                <ul>
+                    <li>After the Front Desk assigns a counsellor, the case will appear on the counsellor dashboard.
+                    </li>
+                    <li>The counsellor should click on the <strong>“View Profile &amp; Counsel”</strong> option.<br>This
+                        will display the basic demographics of the athlete.</li>
+                    <li>The counsellor understands the athlete&rsquo;s concerns, enquires about their reason for
+                        visiting, and discusses suitable packages.</li>
+                    <li>They record key insights from the discussion, confirm financial consent, and note any important
+                        observations or internal remarks.</li>
+                    <li>Based on the interaction, they decide the next step, refer the athlete to the appropriate
+                        department if required, and mark the counselling as completed.</li>
+                </ul>
+            </div>
+
+            <div id="specialist-scheduler" class="module-tab-content" style="display: none;">
+                <h4 style="margin-top: 1rem; color: var(--text-primary);">SPECIALIST SCHEDULER</h4>
+                <p>In the calendar view, they can see the people assigned to them and cancel their allocated
+                    appointments.</p>
+            </div>
+        </div>
+
+        <div id="desc-it-department-flow">
+            <h3>IT DEPARTMENT & SUPPORT FLOW</h3>
+
+            <div class="module-tabs" style="margin-top: 1rem;">
+                <button class="module-tab active" data-img="IT.drawio (1).png" data-target="it-main">IT DEPARTMENT
+                    FLOW</button>
+                <button class="module-tab" data-img="feeder- scheduler/admin - scheduler module.png"
+                    data-target="it-scheduler">IT SCHEDULER</button>
+                <button class="module-tab" data-img="it/athlet & vistor hub.png" data-target="it-athlete-visitor">ATHLETE &amp; VISITOR HUB</button>
+                <button class="module-tab" data-img="it/interns.png" data-target="it-interns">INTERNS MANAGEMENT</button>
+                <button class="module-tab" data-img="it/joining form .png" data-target="it-joining-form">JOINING FORM HUB</button>
+                <button class="module-tab" data-img="it/message  & notifictaion .png" data-target="it-messages">MESSAGES &amp; NOTIFICATIONS</button>
+                <button class="module-tab" data-img="it/user and access .png" data-target="it-user-access">USER &amp; ACCESS CONTROL</button>
+            </div>
+
+            <div id="it-main" class="module-tab-content active">
+                <p>The IT Department serves as the central hub for system administration, managing user onboarding,
+                    role-based access, security, system configurations, and attendance tracking across all
+                    organizational departments.</p>
+
+                <h4>1. Phase 1: User Onboarding & Communications</h4>
+                <p>The IT Department oversees the initial entry of various user profiles into the system through the
+                    Onboard module.</p>
+                <ul>
+                    <li><strong>User Categories:</strong> The system accepts onboarding for four primary user groups:
+                        <ul>
+                            <li>Interns</li>
+                            <li>Staffs</li>
+                            <li>Athlete</li>
+                            <li>Company / Coach / College</li>
+                        </ul>
+                    </li>
+                    <li><strong>Communication Integration:</strong> The Onboarding module is heavily integrated with the
+                        system's communication tools.</li>
+                    <li><strong>Mail Templates:</strong> The system utilizes standardized templates to automatically
+                        dispatch necessary emails, specifically the Registration Mail and the Login Credentials Mail.
+                    </li>
+                    <li><strong>In-App Notifications:</strong> As users are successfully onboarded, the system triggers
+                        real-time In-app Notifications to alert relevant parties.</li>
+                </ul>
+
+                <h4>2. Phase 2: Access Control & Role Management</h4>
+                <p>A critical function of the IT Department is managing what users can see and do within the system.
+                    This is divided into two main streams:</p>
+                <ul>
+                    <li><strong>Role Access:</strong> The system assigns and regulates access based on defined
+                        administrative and operational roles. These roles include:
+                        <ul>
+                            <li>Departments</li>
+                            <li>Mentor</li>
+                            <li>Counsellor</li>
+                            <li>Intern Co-ordinator</li>
+                            <li>HOD (Head of Department)</li>
+                            <li>Center Head</li>
+                            <li>Front Desk</li>
+                        </ul>
+                    </li>
+                    <li><strong>Edit Permissions & Reporting:</strong> Separate from general role access, the IT hub
+                        handles specific Edit Permissions, which govern a user's ability to interact with the Reports
+                        Access / Edit module (allowing users to view or modify system reports).</li>
+                </ul>
+
+                <h4>3. Phase 3: Security & Staff Lifecycle Management</h4>
+                <p>The IT Department handles the administrative backend of staff management and system security.</p>
+                <ul>
+                    <li><strong>Account Suspension:</strong> If staff members are offboarded or terminated, the Remove
+                        Staffs trigger is activated, which pushes a Suspend command to the IT Department, immediately
+                        revoking access.</li>
+                    <li><strong>Credential Management:</strong> For ongoing security, a user requesting a Change Login
+                        Password routes through the Reset Passwords module, which the IT Department processes to restore
+                        secure access.</li>
+                </ul>
+
+                <h4>4. Phase 4: System Configuration (Engine Duplication)</h4>
+                <p>The IT Department manages the overarching platform interface and functional capabilities through the
+                    Engine Duplication module. This allows the system to be customized or white-labeled:</p>
+                <ul>
+                    <li><strong>Changing Logo:</strong> Updating visual branding across the platform.</li>
+                    <li><strong>Functional Control:</strong> Toggling specific system features or capabilities on or off
+                        based on organizational needs.</li>
+                </ul>
+
+                <h4>5. Phase 5: Attendance Management & Departmental Integration</h4>
+                <p>The IT Department powers the core Attendance module, which tracks user activity across various
+                    facility departments.</p>
+                <ul>
+                    <li><strong>Attendance Controls:</strong> The Attendance system evaluates and executes three primary
+                        functions for users:
+                        <ul>
+                            <li>Activate (Starting a session)</li>
+                            <li>Deactivate (Ending a session)</li>
+                            <li>Time Limit (Enforcing session duration caps)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Departmental Inputs:</strong> These attendance controls are directly driven by data and
+                        user interactions originating from specific Departments, which include:
+                        <ul>
+                            <li>HOD</li>
+                            <li>Physiotherapy</li>
+                            <li>Psychology (noted as 'Psychology' in the system diagram)</li>
+                            <li>Sports Science</li>
+                            <li>Interns</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="it-scheduler" class="module-tab-content" style="display: none;">
+                <h4 style="margin-top: 1rem; color: var(--text-primary);">IT SCHEDULER</h4>
+                <p><strong>Scheduler view for IT & Front Desk:-</strong></p>
+                <p>Can view all the activities happening in the entire system. Assign counselling to a specialist and
+                    send the athlete to the department HOD based on the counselling report. The front desk can override
+                    a blocked slot. Book slots and cancel booked slots based on rules.</p>
+            </div>
+
+            <div id="it-athlete-visitor" class="module-tab-content" style="display: none;">
+                <h4 style="margin-top: 1rem; color: var(--text-primary);">ATHLETE &amp; VISITOR HUB</h4>
+                <p>The Athlete &amp; Visitor Hub manages onboarding and access control by tracking user status and enabling the IT team to grant, activate, or resend system access.</p>
+            </div>
+
+            <div id="it-interns" class="module-tab-content" style="display: none;">
+                <h4 style="margin-top: 1rem; color: var(--text-primary);">INTERNS MANAGEMENT</h4>
+                <p>The Interns section maintains intern records and login credentials, allowing the IT team to manage and reset access for smooth system usage.</p>
+            </div>
+
+            <div id="it-joining-form" class="module-tab-content" style="display: none;">
+                <h4 style="margin-top: 1rem; color: var(--text-primary);">JOINING FORM HUB</h4>
+                <p>The Joining Form Hub controls the onboarding data collection process by managing form structures and tracking submitted entries.</p>
+            </div>
+
+            <div id="it-messages" class="module-tab-content" style="display: none;">
+                <h4 style="margin-top: 1rem; color: var(--text-primary);">MESSAGES &amp; NOTIFICATIONS</h4>
+                <p>The Messages &amp; Notifications section handles automated communication by managing email templates used during registration, onboarding, and system events.</p>
+            </div>
+
+            <div id="it-user-access" class="module-tab-content" style="display: none;">
+                <h4 style="margin-top: 1rem; color: var(--text-primary);">USER &amp; ACCESS CONTROL</h4>
+                <p>The User &amp; Access Control section manages system users, roles, and permissions, ensuring secure and role-based access across all modules.</p>
+            </div>
+        </div>
+
+        <div id="desc-athlete-dashboard-flow">
+            <h3>ATHLETE FLOW</h3>
+
+            <h4>1. Athlete Entry into the System</h4>
+            <p>The athlete journey begins when an individual approaches the organization as either a New Athlete or an
+                Existing Athlete.</p>
+            <p><strong>New Athlete Flow</strong></p>
+            <p>A new athlete must first complete the Registration process. After successful registration:</p>
+            <ul>
+                <li>The athlete is moved into the Front Desk Queue.</li>
+                <li>A Counsellor is assigned based on staff availability.</li>
+                <li>The assigned Counsellor fills out a Feedback/Assessment Form, identifies performance needs, and
+                    refers the athlete to the appropriate department (Sports Science, Physiotherapy, or S&C).</li>
+            </ul>
+
+            <h4>2. Package Decision & Payment Pathway</h4>
+            <ul>
+                <li><strong>Scenario A (No Package):</strong> A new plan is proposed or service is terminated. If
+                    proceeding with standalone services, the athlete pays at the Front Desk.</li>
+                <li><strong>Scenario B (Enrollment):</strong> The athlete proceeds to Payment Processing. Upon success,
+                    Login Credentials are emailed, and the package details (Price/Sessions) become visible in their
+                    portal.</li>
+            </ul>
+
+            <h4>3. Athlete Dashboard Capabilities</h4>
+            <p>The Dashboard serves as the primary interface for the athlete to:</p>
+            <ul>
+                <li>View Profile and Reports.</li>
+                <li>Book / Cancel Appointments (subject to system rules).</li>
+                <li>Upload Documents and monitor Session Count.</li>
+            </ul>
+
+            <h4>4. Appointment Booking Workflow & The X-1-10 Rule</h4>
+            <p>When the athlete accesses the booking dashboard, the system initiates a logic check based on their
+                package status. Regardless of the package, all bookings must satisfy the X-1-10 Rule:</p>
+            <p><strong>The Booking Rule (X-1-10):</strong><br>
+                When booking an appointment at Time X, the system validates that the previous appointment ended at least
+                10 minutes before X.</p>
+            <ul>
+                <li><strong>Condition:</strong> Previous Appointment End Time &le; X &ndash; 10 minutes.</li>
+                <li><strong>Validation:</strong> The system accounts for session durations (30 mins for Physio, 60 mins
+                    for S&C) to calculate the previous end time.</li>
+                <li><strong>Outcome:</strong> If the buffer is insufficient, the booking is Rejected.</li>
+            </ul>
+
+            <h4>5. Session Attendance & The X-1-20 Cancellation Rule</h4>
+            <p>On the scheduled day, the system evaluates attendance and enforces the cancellation policy:</p>
+            <ul>
+                <li><strong>If Athlete Attends:</strong> The session is marked Completed and reports are generated.</li>
+                <li><strong>If Athlete Does Not Attend (No-Show):</strong> The session is officially Counted and
+                    Deducted from the package balance.</li>
+                <li><strong>If Athlete Cancels (X-1-20 Rule):</strong> To avoid a session deduction, the athlete must
+                    cancel according to the following logic:</li>
+            </ul>
+            <p><strong>The Cancellation Rule (X-1-20):</strong><br>
+                A cancellation at Time X is only valid if the previous appointment in that slot/specialist's track ended
+                at least 20 minutes before X.</p>
+            <ul>
+                <li><strong>Condition:</strong> Previous Appointment End Time &le; X &ndash; 20 minutes.</li>
+                <li><strong>Outcome:</strong> If satisfied, the session is not deducted, and the slot is released for
+                    others.</li>
+            </ul>
+
+            <h4>6. Specialist Reporting Workflow</h4>
+            <p>After each completed session, specialists enter performance or medical data into the database. Athletes
+                maintain total transparency by viewing these updates via the Report View Dashboard.</p>
+
+            <h4>7. Department Assignment Engine</h4>
+            <p>The HOD assigns the athlete to a primary track (Sports Engine, Physiotherapy, or S&C). This assignment
+                dictates:</p>
+            <ul>
+                <li><strong>Physiotherapy sessions:</strong> Fixed at 30-minute blocks.</li>
+                <li><strong>S&C sessions:</strong> Fixed at 60-minute blocks.</li>
+                <li>The assignment of a specific Specialist and the parameters for evaluation.</li>
+            </ul>
+
+            <h4>8. Session Contour & Progress Monitoring</h4>
+            <p>The Session Contour Dashboard dynamically reflects package utilization.</p>
+            <ul>
+                <li>Athletes monitor personal usage.</li>
+                <li>Front Desk forecasts renewals.</li>
+                <li>Specialists plan training continuity based on remaining sessions.</li>
+            </ul>
+
+            <h4>9. Package Renewal / Continuation Logic</h4>
+            <p>As the balance reaches zero, the athlete&mdash;guided by Specialist reports and Counselor
+                feedback&mdash;chooses to:</p>
+            <ul>
+                <li>Renew or Upgrade the current plan.</li>
+                <li>Shift Department (e.g., transitioning from Physio rehab to S&C performance).</li>
+                <li>Terminate Service upon reaching their goals.</li>
+            </ul>
+        </div>
+
+        <div id="desc-intern-dashboard-flow">
+            <h3>INTERN FLOW</h3>
+
+            <h4>1. Intern Entry into the System</h4>
+            <p>The intern onboarding journey begins when a candidate joins the organization through either:</p>
+            <ul>
+                <li>Batch Internship Program</li>
+                <li>Independent Internship Program</li>
+            </ul>
+            <p>Both types of interns are required to complete the Registration process. After successful registration,
+                the intern is moved into the Front Desk Queue, where the administrative team verifies:</p>
+            <ul>
+                <li>Internship registration details</li>
+                <li>Payment confirmation (if applicable)</li>
+            </ul>
+            <p>Once payment verification is completed, the intern proceeds to the formal onboarding stage.</p>
+
+            <h4>2. Intern Onboarding & Credential Creation</h4>
+            <p>During the onboarding phase:</p>
+            <ul>
+                <li>The Front Desk team officially onboards the intern into the system.</li>
+                <li>Login credentials are generated and sent to the intern's email.</li>
+                <li>The intern is now officially marked as an Active Intern.</li>
+            </ul>
+            <p>At this stage, interns are assigned weekly to specific departments and mapped to Mentors for training and
+                supervision.</p>
+
+            <h4>3. Department Allocation & Mentorship</h4>
+            <p>Each intern is assigned to specialized clinical or performance departments, such as:</p>
+            <ul>
+                <li>Physiotherapy</li>
+                <li>Biomechanics</li>
+                <li>Strength & Conditioning</li>
+            </ul>
+            <p>To ensure both theoretical and applied learning exposure, interns are required to attend Weekly classes
+                and execute Mentor-assigned practical tasks.</p>
+
+            <h4>4. Dashboard Access & IT Support Enablement</h4>
+            <p>Once onboarding is completed, IT Support provisions access to the Intern Dashboard. This dashboard acts
+                as the central working interface for interns, enabling them to manage:</p>
+            <ul>
+                <li>Profile Information</li>
+                <li>Pre-evaluation forms</li>
+                <li>Assessments</li>
+                <li>Attendance tracking</li>
+                <li>Document uploads</li>
+                <li>Weekly progress reports</li>
+                <li>Final evaluation marks</li>
+            </ul>
+
+            <h4>5. Task Assignment & Data Entry Workflow</h4>
+            <p>Interns receive specific departmental tasks. When specialists assign an intern to assist them:</p>
+            <ul>
+                <li>The intern is responsible for entering athlete/session data into the system.</li>
+                <li>Data entry is executed through the Front Desk Interface or the Data Entry Module.</li>
+                <li>After submission, the entered data becomes visible in specific athlete reports.</li>
+                <li>The data is then Verified by Specialists to ensure accuracy and supervised learning.</li>
+            </ul>
+
+            <h4>6. Weekly Evaluation Cycle</h4>
+            <p>Intern performance is continuously monitored through a strict weekly evaluation mechanism:</p>
+            <ul>
+                <li>Week 1 Evaluation</li>
+                <li>Week 2 Evaluation</li>
+                <li>Week 3 Evaluation</li>
+                <li>Week 4 Evaluation as a test + final assesments</li>
+            </ul>
+            <p>Additionally, every 6th day of the week, a test is conducted. This creates a structured performance
+                tracking loop combining:</p>
+            <ul>
+                <li>Practical task review</li>
+                <li>Knowledge assessment</li>
+                <li>Mentor feedback</li>
+            </ul>
+
+            <h4>7. Final Evaluation & HOD Review</h4>
+            <p>After the completion of all weekly evaluations:</p>
+            <ul>
+                <li>A Final Assessment is conducted.</li>
+                <li>Post-assessment, the intern&rsquo;s overall performance is reviewed by the Department HOD (Head of
+                    Department).</li>
+                <li>The HOD determines whether the intern is eligible for formal certification and progression.</li>
+            </ul>
+
+            <h4>8. Certification Eligibility Decision Flow</h4>
+            <p>If the HOD determines the intern is eligible, the next decision depends on their financial clearance:</p>
+            <ul>
+                <li><strong>Scenario A: If College Fees / Internship Fees are Paid</strong>
+                    <ul>
+                        <li>The Certificate is issued.</li>
+                        <li>A Certification email is sent directly to the intern.</li>
+                        <li>The internship process is successfully closed.</li>
+                    </ul>
+                </li>
+                <li><strong>Scenario B: If Fees are Not Paid</strong>
+                    <ul>
+                        <li>Certificate access is blocked in the system.</li>
+                        <li>A Notification mail is sent to the intern (or college) requesting fee payment.</li>
+                        <li>The certificate is officially issued only after payment clearance.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>9. Post-Internship Outcome Pathways</h4>
+            <p>After the tests and final assessments, an additional eligibility evaluation occurs for top performers.
+            </p>
+            <p>If Shortlisted as an Eligible Candidate: The intern is moved into one of the following progression
+                pathways:</p>
+            <ul>
+                <li>Hire Plan (Full-time Opportunity)</li>
+                <li>Further Internship Extension</li>
+                <li>Waitlist for Future Opportunities</li>
+            </ul>
+            <p>(If not shortlisted, the internship cycle formally concludes after certification).</p>
+
+            <h4>10. Continuous Learning Loop</h4>
+            <p>Throughout the entire lifecycle of the internship, a closed learning-performance-improvement loop is
+                maintained. Interns continuously receive:</p>
+            <ul>
+                <li>Weekly classes</li>
+                <li>Mentor assignments</li>
+                <li>Practical exposure</li>
+                <li>Evaluation feedback</li>
+            </ul>
+        </div>
+
+        <div id="desc-registration-flow">
+            <h3>REGISTRATION MODULE</h3>
+
+            <h4>1. User Entry into the System</h4>
+            <p>The process begins when a user interacts with the system. Users are categorized into specific roles to
+                determine their correct onboarding path. The categories include:</p>
+            <ul>
+                <li>Interns</li>
+                <li>Visitors</li>
+                <li>Athletes</li>
+                <li>Special Athletes</li>
+                <li>Organizations (Specifically including DYES Geethana Government Employees)</li>
+            </ul>
+
+            <h4>2. New Visitor Verification</h4>
+            <p>Once a user enters the system, the first decision node evaluates: <strong>IF NEW VISITOR</strong>.</p>
+            <ul>
+                <li><strong>Existing Users:</strong> Bypass registration and proceed directly to their respective
+                    dashboards or scheduling.</li>
+                <li><strong>New Users:</strong> Must complete the registration process.</li>
+            </ul>
+
+            <h4>3. Registration Channels</h4>
+            <p>New users proceed to Registration, which is tracked through specific channels and their corresponding use
+                cases:</p>
+            <ul>
+                <li><strong>QR Code:</strong> Used primarily for instant walk-in registrations at the facility.</li>
+                <li><strong>Link (Batch):</strong> Utilized for batch-wise or group registrations (e.g., teams or
+                    institutions).</li>
+                <li><strong>Social Media:</strong> Driven by online promotions and marketing campaigns.</li>
+                <li><strong>Website:</strong> Used by individuals looking to directly schedule slots.</li>
+            </ul>
+
+            <h4>4. Registration Success Confirmation</h4>
+            <p>Upon submitting the registration details through any of the above channels, the system triggers an
+                automated action:</p>
+            <p>A "Registration Successful" confirmation is sent to the user's email from the address:
+                <strong>registration@iiitmysports.com</strong>.
+            </p>
+
+            <h4>5. Front Desk Approval & Intern Branching</h4>
+            <p>The profile is then routed to Front Desk Approval. Here, the system hits a critical branching node:
+                <strong>IF INTERN</strong>.
+            </p>
+            <ul>
+                <li><strong>If YES (The user is an Intern):</strong>
+                    <ul>
+                        <li>They are routed to Payment and Document Verification.</li>
+                        <li>Once verified, they move to Onboard the Interns, which involves assistance from IT Support.
+                        </li>
+                        <li>The intern is then mapped to the relevant Departments (Admin, Front Desk, Psychology,
+                            Biomechanics, Physiotherapy, Counsellors, Massage).</li>
+                        <li>They are directly connected to the Counsellor node.</li>
+                    </ul>
+                </li>
+                <li><strong>If NO (The user is a standard Athlete/Visitor/Org):</strong>
+                    <ul>
+                        <li>They bypass the onboarding pipeline and are routed directly to the Scheduler.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>6. Scheduling & DYES Session Monitoring</h4>
+            <p>For standard users arriving at the Scheduler, the system actively monitors organizational caps:</p>
+            <ul>
+                <li><strong>Alert Generation:</strong> If the limit is exceeded, an alert message is immediately
+                    displayed on both the Front Desk Dashboard and the Counsellor Dashboard.</li>
+                <li><strong>DYES 500 Sessions Over Rule:</strong> The system checks if the user belongs to DYES and if
+                    they have exceeded 500 sessions.</li>
+            </ul>
+
+            <h4>7. Counsellor Assignment & Interaction</h4>
+            <p>The system proceeds to Assign Counsellor.</p>
+            <p>The Counsellor evaluates the user's needs, interacting with the various Departments as necessary to build
+                an appropriate treatment or service plan.<br>
+                Following the session, a Feedback Form is completed, and the user is formally referred to the required
+                department.</p>
+
+            <h4>8. Payment Processing and Plan Confirmation</h4>
+            <p>The user is routed back to the Front Desk Payment stage, presenting a decision node based on their
+                agreement to the proposed plan.</p>
+            <ul>
+                <li><strong>Scenario A: User Agrees (YES)</strong><br>
+                    The user proceeds to payment and selects either Pay Now or Pay Later. Both options successfully
+                    advance the user to Account Activation.</li>
+                <li><strong>Scenario B: User Declines (NO)</strong><br>
+                    The Front Desk initiates the Suggest some new plan / Service Terminated step.
+                    <ul>
+                        <li><strong>Sub-Decision (Yes):</strong> The user accepts the revised plan, proceeds to payment
+                            (Pay Now / Pay Later), and advances to Account Activation.</li>
+                        <li><strong>Sub-Decision (No):</strong> The user rejects the revised plan. They are routed to
+                            the Service Terminal block, ending the flow without account generation.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>9. Account Activation</h4>
+            <p>For all users who successfully navigate the payment stage (regardless of choosing Pay Now or Pay Later),
+                the system executes a final automated step:</p>
+            <p>Login credentials (Login ID and Password) are generated and sent through mail to the user, granting them
+                full access to the system.</p>
+
+            <h4>10. Mail Templates</h4>
+            <p>The system utilizes automated templates to handle communication during the registration and onboarding
+                phases:</p>
+
+            <h5>I). Registration Success Email Template</h5>
+            <p>This email is triggered automatically upon the successful submission of a new registration.</p>
+            <ul>
+                <li><strong>Template Name:</strong> Registration success</li>
+                <li><strong>Description:</strong> Sent when a new registration is submitted</li>
+                <li><strong>Trigger / When to send:</strong> On registration success</li>
+                <li><strong>Send from:</strong> registrations@ilitmysport.com</li>
+                <li><strong>Subject:</strong> Registration Successful – Centre for Sports Science</li>
+                <li><strong>Variables Used:</strong> {{full_name}}</li>
+                <li><strong>Status:</strong> Active</li>
+            </ul>
+
+            <h5>II). Athlete/Visitor Welcome Email Template (with Credentials)</h5>
+            <p>This email is triggered when the IT team officially onboards an athlete or visitor, providing them with
+                their system access credentials.</p>
+            <ul>
+                <li><strong>Template Name:</strong> Athlete/Visitor welcome</li>
+                <li><strong>Description:</strong> Sent when IT onboard an athlete or visitor (with login credentials)
+                </li>
+                <li><strong>Trigger / When to send:</strong> On athlete/visitor onboard (welcome with credentials)</li>
+                <li><strong>Send from:</strong> info@ilitmysport.com</li>
+                <li><strong>Subject:</strong> Welcome – Your account is ready</li>
+                <li><strong>Variables Used:</strong> {{full_name}}, {{username}}, {{password}}, {{login_url}}</li>
+                <li><strong>Status:</strong> Active</li>
+            </ul>
+        </div>
+
+        <div id="desc-intern-coordinator-flow">
+            <h3>INTERN COORDINATOR FLOW</h3>
+
+            <p>The Intern Coordinator Module acts as the administrative command center for the entire internship
+                lifecycle. It manages the structured onboarding, training, evaluation, mentorship mapping, attendance
+                tracking, and final certification of all interns.</p>
+            <p>The internship program is conducted batch-wise, governed by the following parameters:</p>
+            <ul>
+                <li>Each batch consists of a strictly capped limit of 50 interns.</li>
+                <li>Interns can join the program through two primary channels:
+                    <ul>
+                        <li>College Partnerships (MOU-based onboarding)</li>
+                        <li>Independent Interns (Direct applicants)</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>The Intern Coordinator plays the central, overarching role in managing this entire process from intake to
+                graduation.</p>
+
+            <h4>2. Batch Creation and Registration Flow</h4>
+            <h5>2.1 Batch Planning & Link Generation</h5>
+            <p>The internship cycle begins with the Intern Coordinator creating a dedicated Batch Registration Link.
+                This link is uniquely generated for both College interns and Independent interns.</p>
+            <ul>
+                <li><strong>Purpose:</strong> This link enables controlled intake, ensuring the system enforces the
+                    50-intern batch limit and strictly tracks duration compliance.</li>
+            </ul>
+
+            <h5>2.2 College-Based Intern Registration (MOU)</h5>
+            <ul>
+                <li>If a college has signed an official MOU (Memorandum of Understanding), the Intern Coordinator sends
+                    the batch link directly to the respective college administrator.</li>
+                <li>The college then shares the link with their approved students.</li>
+                <li>Students complete their registration through the system and are immediately categorized into one of
+                    two financial buckets:
+                    <ul>
+                        <li><strong>Pre-Paid Interns:</strong> Intern fees are already paid through institutional/bulk
+                            arrangements.</li>
+                        <li><strong>Free Interns:</strong> Interns eligible for fully sponsored or promotional
+                            internship access.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h5>2.3 Independent Intern Registration</h5>
+            <ul>
+                <li>Independent applicants access the public or directly shared batch link.</li>
+                <li>They register their details through the system and proceed directly to the verification stage.</li>
+            </ul>
+
+            <h4>3. Onboarding & Verification Gatekeeping</h4>
+            <p>Once the initial registration forms are submitted, the Intern Coordinator and Front Desk manage a strict
+                validation phase:</p>
+            <ul>
+                <li>Intern details undergo comprehensive Payment Verification and Eligibility Validation.</li>
+                <li>Only after successful verification are interns officially transitioned to the "Onboarded" status.
+                </li>
+                <li><strong>System Check:</strong> This step acts as a firewall to ensure:
+                    <ul>
+                        <li>Only verified and financially cleared interns gain system access.</li>
+                        <li>Batch integrity, size limits, and participation tracking metrics are flawlessly maintained.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>4. System Access Provisioning (IT Handoff)</h4>
+            <p>After the Coordinator confirms onboarding, the intern data is automatically transferred to the IT Team.
+                The IT Team performs the backend system enablement tasks, including:</p>
+            <ul>
+                <li>Account Creation</li>
+                <li>System Access Provisioning</li>
+                <li>Dashboard Activation</li>
+            </ul>
+            <p>Once the IT Team executes the command:</p>
+            <ul>
+                <li>Login credentials are automatically generated by the system.</li>
+                <li>These credentials are sent to the intern’s registered email ID.</li>
+                <li>Interns can then log in, access their dashboard, and officially begin their internship journey.</li>
+            </ul>
+
+            <h4>5. Internship Training and Evaluation Structure</h4>
+            <p>After gaining system access, interns enter the structured, multi-disciplinary internship program.</p>
+
+            <h5>5.1 Pre-Evaluation Phase</h5>
+            <p>Before active training begins, interns undergo a mandatory Pre-Evaluation assessment to determine:</p>
+            <ul>
+                <li>Baseline knowledge</li>
+                <li>Current skill levels</li>
+                <li>Specific training intensity requirements (This data helps mentors and trainers heavily customize
+                    their teaching approach for the batch).</li>
+            </ul>
+
+            <h5>5.2 Training Duration and Domain Structure</h5>
+            <p>The core internship program runs across a strict four-week timeline: Week 1 | Week 2 | Week 3 | Week 4
+            </p>
+            <p>During these weeks, interns are rotated and trained across multiple sports science domains, specifically:
+            </p>
+            <ul>
+                <li>Physiotherapy</li>
+                <li>Strength and Conditioning (S & C)</li>
+                <li>Biomechanics</li>
+            </ul>
+
+            <h5>5.3 Weekly Evaluation & Attendance Monitoring</h5>
+            <p>Throughout the entire training period:</p>
+            <ul>
+                <li>Intern performance is evaluated on a weekly basis by their assigned mentors.</li>
+                <li>Attendance is tracked continuously via the central Attendance Module. (These combined metrics
+                    ultimately determine program engagement, learning progress, and final certification eligibility).
+                </li>
+            </ul>
+
+            <h5>5.4 The 6th-Day Assessment Test</h5>
+            <p>To ensure consistent and standardized knowledge evaluation:</p>
+            <ul>
+                <li>A formal Test is conducted every 6th day of the week.</li>
+                <li>These test results are logged into the system and heavily contribute to the intern's overall
+                    performance scoring.</li>
+            </ul>
+
+            <h4>6. Mentor Assignment & Supervision</h4>
+            <p>The Intern Coordinator is responsible for dynamically assigning Weekly Mentors to the interns. Mentors
+                are the clinical supervisors responsible for:</p>
+            <ul>
+                <li>Monitoring daily intern learning progress.</li>
+                <li>Providing hands-on guidance and technical support.</li>
+                <li>Conducting weekly performance reviews and grading the 6th-day tests.</li>
+                <li>Supporting overall evaluation activities. (This mapping ensures every intern receives structured
+                    supervision and actionable feedback).</li>
+            </ul>
+
+            <h4>7. Holiday and Leave Management</h4>
+            <p>To maintain accurate session tracking, the Intern Coordinator holds administrative control over the
+                intern schedule. They manage:</p>
+            <ul>
+                <li><strong>Intern Holidays</strong> (Aligning with facility or college schedules)</li>
+                <li><strong>Leave Approvals</strong> (Processing sick or personal leave requests)</li>
+                <li><strong>Attendance Adjustments</strong> (Manually correcting system clock-ins if necessary)</li>
+            </ul>
+
+            <h4>8. Certification Eligibility Evaluation</h4>
+            <p>At the conclusion of the 4-week program, the system performs a comprehensive Eligibility Check based on
+                the following aggregated criteria:</p>
+            <ul>
+                <li>Attendance Percentage (Must meet minimum threshold)</li>
+                <li>Evaluation Scores (From weekly practicals)</li>
+                <li>Test Performance (From the 6th-day assessments)</li>
+                <li>Mentor Feedback</li>
+                <li>Payment Completion (If applicable to their specific intern category)</li>
+            </ul>
+
+            <h4>9. Certificate Issuance & Financial Compliance Flow</h4>
+
+            <h5>9.1 Scenario A: Fully Eligible & Cleared Interns</h5>
+            <p>If the intern satisfies all academic and financial eligibility conditions (applying to both Independent
+                and cleared College interns):</p>
+            <ul>
+                <li>The system proceeds with immediate Certificate Issuance.</li>
+                <li>The certificate is generated and made accessible to the intern and the partner college.</li>
+            </ul>
+
+            <h5>9.2 Scenario B: Payment Dependency (Blocked Status)</h5>
+            <p>For interns registered through colleges, a strict financial check occurs.</p>
+            <ul>
+                <li>If fees are <strong>NOT paid</strong>:
+                    <ul>
+                        <li>The Certificate status automatically becomes Blocked.</li>
+                        <li>The system triggers an Email notification sent to the college/intern urgently requesting fee
+                            payment.</li>
+                    </ul>
+                </li>
+                <li><strong>Resolution:</strong>
+                    <ul>
+                        <li>Once payment is manually verified and updated in the system, the Certificate is Unblocked
+                            and officially Issued. (This ensures total financial compliance before any institutional
+                            credentials are released).</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div id="desc-frontdesk-flow">
+            <h3>FRONT DESK OPERATIONS</h3>
+
+            <div class="module-tabs" style="margin-top: 1rem;">
+                <button class="module-tab active" data-img="FRONT.drawio.png" data-target="frontdesk-main">FRONT DESK
+                    FLOW</button>
+                <button class="module-tab" data-img="feeder- scheduler/admin - scheduler module.png"
+                    data-target="frontdesk-scheduler">FRONT DESK SCHEDULER</button>
+                <button class="module-tab" data-img="feeders modules/attendance modules .png"
+                    data-target="frontdesk-attendance">ATTENDANCE MODULE</button>
+                <button class="module-tab" data-img="frontdesk/interns.png" data-target="frontdesk-interns">INTERNS
+                    LIST</button>
+                <button class="module-tab" data-img="frontdesk/my dashboard.png"
+                    data-target="frontdesk-appointments">APPOINTMENTS</button>
+                <button class="module-tab" data-img="frontdesk/billing.png"
+                    data-target="frontdesk-billing">BILLING</button>
+            </div>
+
+            <div id="frontdesk-main" class="module-tab-content active">
+                <h4>1. System Navigation (Left Menu Bar)</h4>
+                <p>The interface provides a persistent left-hand navigation menu for quick access to core functions:</p>
+                <ul>
+                    <li><strong>Appointment Request:</strong> Routes to the Front Desk Dashboard for client management.
+                    </li>
+                    <li><strong>Scheduler:</strong> Opens the centralized scheduling view.</li>
+                    <li><strong>Attendance:</strong> Directs to the staff clock-in/out module.</li>
+                    <li><strong>Intern:</strong> Opens the dedicated Intern Dashboard.</li>
+                    <li><strong>Billing:</strong> Directs to the standalone financial module.</li>
+                </ul>
+
+                <h4>2. Core Operational Workflows</h4>
+                <p>From the central <strong>FRONT DESK</strong> node, the system branches into four primary workflows:
+                </p>
+
+                <h5>Workflow A: Direct Utilities (Billing & Scheduling)</h5>
+                <p>These are standalone utilities accessible directly from the Front Desk hub for day-to-day
+                    administrative tasks.</p>
+                <ul>
+                    <li><strong>Billing Module:</strong> Used for processing ad-hoc financial transactions, generating
+                        invoices, and viewing payment histories outside of the standard appointment flow.</li>
+                    <li><strong>Scheduler:</strong> A real-time visual interface allowing front desk staff to monitor,
+                        manage, and update all facility schedules and appointments.</li>
+                </ul>
+
+                <h5>Workflow B: Intern Dashboard (Onboarding)</h5>
+                <p>This workflow isolates intern management from standard client traffic to streamline facility
+                    onboarding.</p>
+                <ul>
+                    <li><strong>Intern Selection:</strong> The staff selects the INTERN entity from the dashboard.</li>
+                    <li><strong>Verification Step:</strong> The system prompts the <em>Verification of Payment &
+                            Documentation</em>. The front desk staff must clear these administrative prerequisites
+                        before the intern is officially active in the system.</li>
+                </ul>
+
+                <h5>Workflow C: Front Desk Dashboard (Client Management)</h5>
+                <p>This is the primary operational pipeline for handling standard users: Athletes, Visitors, and
+                    Organizations.</p>
+
+                <p><strong>Registration & SLA Tracking:</strong></p>
+                <ul>
+                    <li>When a user arrives, a <em>New Registration</em> entry is created.</li>
+                    <li>The system uses a color-coded Service Level Agreement (SLA) to manage wait times:
+                        <ul>
+                            <li><strong>Fresh Request (Green):</strong> The user has been registered and is within the
+                                acceptable wait-time threshold.</li>
+                            <li><strong>Request After 10 Min (Red):</strong> If the user is not assigned within 10
+                                minutes, the request visually escalates to red to alert staff of a delay.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <p><strong>Counsellor Assignment:</strong></p>
+                <ul>
+                    <li>Regardless of SLA status (Green or Red), the front desk staff processes the request and executes
+                        the <em>Assign To -&gt; Counsellor</em> action.</li>
+                </ul>
+
+                <p><strong>Post-Session Processing:</strong></p>
+                <ul>
+                    <li>Following the consultation, the Counsellor fills out a Feedback Form, which includes specific
+                        <em>Packages Details</em>.
+                    </li>
+                    <li>This form is routed back to the Front Desk.</li>
+                    <li>The Front Desk reviews the feedback and finalizes the transaction at the Payment stage.</li>
+                </ul>
+            </div>
+
+            <div id="frontdesk-scheduler" class="module-tab-content" style="display: none;">
+                <h4 style="margin-top: 1rem; color: var(--text-primary);">FRONT DESK SCHEDULER</h4>
+                <p><strong>Scheduler view for IT & Front Desk:-</strong></p>
+                <p>Can view all the activities happening in the entire system. Assign counselling to a specialist and
+                    send the athlete to the department HOD based on the counselling report. The front desk can override
+                    a blocked slot. Book slots and cancel booked slots based on rules.</p>
+            </div>
+
+            <div id="frontdesk-attendance" class="module-tab-content" style="display: none;">
+                <h4 style="margin-top: 1rem; color: var(--text-primary);">ATTENDANCE MODULE</h4>
+                <p><strong>in :- specialist , intern ,frontdesk . it support</strong></p>
+                <p>This module strictly handles the time and location tracking for staff members logging their daily
+                    shifts.
+                    It begins with a central decision node: <strong>IF IN OFFICE</strong>.</p>
+                <ul>
+                    <li><strong>Scenario 1: On-Site (YES)</strong><br>
+                        The user is routed to the <em>Marks In Office</em> block.<br>
+                        They are required to input data via the <em>Select Location</em> prompt (e.g., specifying their
+                        exact desk, floor, or department).<br>
+                        At the end of their shift, the flow concludes with the <em>Mark End of Day</em> action.</li>
+                    <li><strong>Scenario 2: Off-Site (NO)</strong><br>
+                        The user is routed to the <em>Out of Office</em> block.<br>
+                        To successfully log an off-site shift, the user must provide two distinct inputs:<br>
+                        - <strong>Reason</strong>: Justification for the remote/off-site work.<br>
+                        - <strong>Location</strong>: Their current physical location.<br>
+                        Similar to the on-site flow, the user's shift concludes by executing the <em>Mark End of
+                            Day</em>
+                        action.</li>
+                </ul>
+            </div>
+
+            <div id="frontdesk-interns" class="module-tab-content" style="display: none;">
+                <h4 style="margin-top: 1rem; color: var(--text-primary);">INTERNS MODULE</h4>
+                <p>The Interns module displays all registered interns, and by clicking “View” on a specific intern, the
+                    front desk can verify payment status, check the NOC, and review complete registration details.</p>
+            </div>
+
+            <div id="frontdesk-appointments" class="module-tab-content" style="display: none;">
+                <h4 style="margin-top: 1rem; color: var(--text-primary);">APPOINTMENTS</h4>
+                <p>The Front Desk dashboard acts as a central control panel to manage daily operations, including
+                    registrations, counselling assignments, appointment tracking, payments, and department allocation,
+                    ensuring a smooth end-to-end workflow.</p>
+            </div>
+
+            <div id="frontdesk-billing" class="module-tab-content" style="display: none;">
+                <h4 style="margin-top: 1rem; color: var(--text-primary);">BILLING SECTION</h4>
+                <p>The Billing section provides a complete view of revenue generated from interns, athletes, and
+                    visitors, along with detailed payment records for easy financial tracking.</p>
+            </div>
+        </div>
+
+        <div id="desc-scheduler-flow">
+            <h3>SCHEDULER</h3>
+
+            <h4>1. Executive Summary</h4>
+            <p>The Scheduler Module is the central coordinating engine of the facility. It aligns athlete bookings,
+                intern classes, specialist availability, and rigid time-based rules to ensure seamless operations. It
+                acts as the definitive source of truth for session tracking (Session Contour), feeding real-time data to
+                various user dashboards.</p>
+
+            <h4>2. System Inputs & Pre-Booking</h4>
+            <p>The Scheduler receives availability and scheduling inputs from multiple operational branches before any
+                booking occurs.</p>
+            <ul>
+                <li><strong>Intern & Mentor Schedules:</strong> Interns have a Daily Classes Schedule managed by their
+                    Mentor. This schedule is fed directly into the Scheduler to block out required times.</li>
+                <li><strong>Fixed-Duration Sessions:</strong> Standardized services automatically populate the Scheduler
+                    with predefined time blocks:
+                    <ul>
+                        <li>Physiotherapy: 30-minute sessions.</li>
+                        <li>Strength & Conditioning (S&C): 60-minute sessions.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>3. Client Onboarding & The Booking Rule</h4>
+            <p>Before a client can book a slot in the Scheduler, they must complete the onboarding and payment flow
+                (Registration &rarr; Counselor Feedback &rarr; Payment &rarr; Login Credentials).</p>
+            <p><strong>The Booking Rule (X - 1 - 10)</strong></p>
+            <p>When booking a new appointment at Time X, the system enforces a strict buffer to prevent overlap and
+                ensure transition time.</p>
+            <ul>
+                <li><strong>Condition:</strong> Previous Appointment End Time &le; X &ndash; 10 minutes.</li>
+                <li><strong>Validation:</strong> The system validates the previous appointment&rsquo;s end time
+                    (considering its specific duration) before confirming.</li>
+                <li><strong>Output:</strong>
+                    <ul>
+                        <li><strong>Approved:</strong> If the 10-minute buffer is satisfied.</li>
+                        <li><strong>Rejected:</strong> If the condition is violated, the system returns a reason:
+                            "Insufficient transition buffer (10 mins required)."</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>4. Staff Attendance & Availability Check</h4>
+            <p>Before a booked session can commence, the system verifies the physical presence of the required staff via
+                the Attendance Module.</p>
+            <ul>
+                <li><strong>Scenario A (Available):</strong> The staff member punches IN (Time stamped). They are marked
+                    AVAILABLE in the Scheduler to take appointments.</li>
+                <li><strong>Scenario B (Not Available):</strong> The staff member is marked Out of Office. They are
+                    marked NOT AVAILABLE, triggering an immediate system alert.</li>
+            </ul>
+
+            <h4>5. Session Execution & Edge Cases</h4>
+            <p>Once an appointment is booked and staff availability is confirmed, the HOD officially assigns the slot to
+                Specialists. The flow manages three critical edge cases:</p>
+            <ul>
+                <li><strong>Exception A: Specialist Unavailable</strong><br>
+                    If a specialist is marked unavailable for a booked slot, an Alert Message is dispatched to the HOD,
+                    Front Desk, and Center Head.
+                    <ul>
+                        <li>If Reassigned: A Notification is sent to the athlete, and the session proceeds.</li>
+                        <li>If Not Reassigned: The system instructs the athlete/front desk to wait until a new
+                            specialist is assigned.</li>
+                    </ul>
+                </li>
+                <li><strong>Exception B: Athlete No-Show & The Cancellation Rule (X - 1 - 20)</strong><br>
+                    If an athlete cannot appear, the system identifies the missed slot.<br>
+                    <strong>Cancellation Rule:</strong> When canceling at Time X, the system ensures the previous
+                    appointment ended at least 20 minutes prior (Previous End Time &le; X &ndash; 20 minutes).
+                    <ul>
+                        <li>If Rule Met: The session is unblocked and reverted for other users to book.</li>
+                        <li>If Rule Violated/No-Show: The session is counted and deducted from the athlete's package
+                            despite their absence.</li>
+                    </ul>
+                </li>
+                <li><strong>Exception C: Session Extension</strong><br>
+                    If a session runs over its allotted time, the system prompts for athlete consent.
+                    <ul>
+                        <li>If Consent Granted: The Session is Extended in the system.</li>
+                        <li>If Consent Denied: The Session is Released back to the scheduler immediately.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>6. Session Contour (Final Tracking & Analytics)</h4>
+            <p>Regardless of the path a session takes (completed, canceled, extended, or reassigned), all data flows
+                into the Session Contour.</p>
+            <ul>
+                <li><strong>Function:</strong> Ensures every session is accurately Counted, Minused (deducted from
+                    packages), and Displayed.</li>
+                <li><strong>Visibility:</strong> Live session data is broadcast to the dashboards of Specialists,
+                    Athletes, Coaches, and the HOD.</li>
+            </ul>
+        </div>
+
+        <div id="desc-attendance-module">
+            <h3>ATTENDANCE MODULE</h3>
+            <p><strong>in :- specialist , intern ,frontdesk . it support</strong></p>
+            <p>This module strictly handles the time and location tracking for staff members logging their daily shifts.
+                It begins with a central decision node: <strong>IF IN OFFICE</strong>.</p>
+            <ul>
+                <li><strong>Scenario 1: On-Site (YES)</strong><br>
+                    The user is routed to the <em>Marks In Office</em> block.<br>
+                    They are required to input data via the <em>Select Location</em> prompt (e.g., specifying their
+                    exact desk, floor, or department).<br>
+                    At the end of their shift, the flow concludes with the <em>Mark End of Day</em> action.</li>
+                <li><strong>Scenario 2: Off-Site (NO)</strong><br>
+                    The user is routed to the <em>Out of Office</em> block.<br>
+                    To successfully log an off-site shift, the user must provide two distinct inputs:<br>
+                    - <strong>Reason</strong>: Justification for the remote/off-site work.<br>
+                    - <strong>Location</strong>: Their current physical location.<br>
+                    Similar to the on-site flow, the user's shift concludes by executing the <em>Mark End of Day</em>
+                    action.</li>
+            </ul>
+        </div>
+
+        <div id="desc-scheduler-module">
+            <h3>SCHEDULER MODULE</h3>
+            <div class="module-tabs">
+                <button class="module-tab active" data-img="feeder- scheduler/admin - scheduler module.png"
+                    data-target="scheduler-it-text">IT & Front Desk Scheduler</button>
+                <button class="module-tab" data-img="feeder- scheduler/scheduler module - specilaits .png"
+                    data-target="scheduler-specialist-text">Specialist Scheduler</button>
+            </div>
+
+            <div id="scheduler-it-text" class="module-tab-content active">
+                <p><strong>Scheduler view for IT & Front Desk:-</strong></p>
+                <p>Can view all the activities happening in the entire system. Assign counselling to a specialist and
+                    send the athlete to the department HOD based on the counselling report. The front desk can override
+                    a blocked slot. Book slots and cancel booked slots based on rules.</p>
+            </div>
+
+            <div id="scheduler-specialist-text" class="module-tab-content" style="display: none;">
+                <p><strong>Specialist Scheduler:-</strong></p>
+                <p>They can see the people allocated to them. Cancel appointments allocated to them.</p>
+            </div>
+        </div>
+
+        <div id="desc-mentors-module">
+            <h3>MENTORS MODULE</h3>
+            <div class="module-tabs">
+                <button class="module-tab active" data-img="mentors module/interns list .png"
+                    data-target="mentors-interns-text">Interns List</button>
+                <button class="module-tab" data-img="mentors module/assements .png"
+                    data-target="mentors-assessments-text">Assessments</button>
+            </div>
+
+            <div id="mentors-interns-text" class="module-tab-content active">
+                <p><strong>Interns list :-</strong></p>
+                <p>This tab displays the list of all interns assigned to the mentor.<br>
+                    The mentor can view details such as the intern’s name, batch, college, and current assessment
+                    status.</p>
+                <p>Each intern has multiple assessment options (e.g., Sports Science, Sports Physio, Clinical Physio,
+                    Strength & Conditioning).<br>
+                    By clicking on any of these assessment buttons, the mentor can open the evaluation form for that
+                    specific domain.</p>
+            </div>
+
+            <div id="mentors-assessments-text" class="module-tab-content" style="display: none;">
+                <p><strong>Assessments :-</strong></p>
+                <p>This tab allows the mentor to evaluate an intern’s performance in a specific domain.<br>
+                    The mentor can rate the intern’s skills (e.g., professionalism, communication, proactiveness,
+                    responsibility) on a defined scale (1–5).</p>
+                <p>The mentor selects the week, date, and relevant department, then provides ratings based on the
+                    intern’s performance in that particular domain.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
