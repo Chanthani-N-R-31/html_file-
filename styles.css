@@ -412,6 +412,47 @@ body {
     .sidebar.collapsed ~ .main-content .top-header {
         padding-left: 4rem;
     }
+
+    .top-header {
+        padding: 0 1rem;
+    }
+
+    .top-header h1 {
+        font-size: 1.1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 60%;
+    }
+
+    .header-actions .tooltip {
+        display: none;
+    }
+
+    .viewer-area {
+        flex-direction: column;
+    }
+
+    .pan-wrapper {
+        flex: 1;
+        min-height: 50vh;
+    }
+
+    .flow-description {
+        flex: none;
+        width: 100%;
+        height: auto;
+        max-height: 50vh;
+        border-left: none;
+        border-top: 1px solid var(--border-color);
+        padding: 1.5rem 1rem;
+    }
+
+    .viewer-controls {
+        bottom: 1rem;
+        right: 1rem;
+        flex-direction: row;
+    }
 }
 
 /* Description Panel */
