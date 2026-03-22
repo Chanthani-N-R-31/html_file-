@@ -70,17 +70,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             if (imgFile) {
-                flowchartImage.src = encodeURI(imgFile);
+                flowchartImage.onload = () => {
+                    flowchartImage.style.opacity = '1';
+                    resetView();
+                };
+                flowchartImage.onerror = () => {
+                    flowchartImage.style.opacity = '1';
+                };
+                flowchartImage.src = imgFile;
+                if (flowchartImage.complete) {
+                    flowchartImage.style.opacity = '1';
+                    resetView();
+                }
             } else {
                 // Using a high-resolution placeholder with realistic dimensions (1920x1080)
                 const urlText = flowName.replace(/\s+/g, '+');
+                flowchartImage.onload = () => {
+                    flowchartImage.style.opacity = '1';
+                    resetView();
+                };
                 flowchartImage.src = `https://placehold.co/1920x1080/e2e8f0/334155?text=${urlText}`;
+                if (flowchartImage.complete) {
+                    flowchartImage.style.opacity = '1';
+                    resetView();
+                }
             }
-
-            flowchartImage.onload = () => {
-                flowchartImage.style.opacity = '1';
-                resetView(); // Center and reset zoom
-            };
         }, 200);
     };
 
@@ -157,10 +171,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (newImg) {
                 flowchartImage.style.opacity = '0';
                 setTimeout(() => {
-                    flowchartImage.src = encodeURI(newImg);
                     flowchartImage.onload = () => {
                         flowchartImage.style.opacity = '1';
                     };
+                    flowchartImage.onerror = () => {
+                        flowchartImage.style.opacity = '1';
+                    };
+                    flowchartImage.src = newImg;
+                    if (flowchartImage.complete) {
+                        flowchartImage.style.opacity = '1';
+                    }
                 }, 200);
             }
         }
