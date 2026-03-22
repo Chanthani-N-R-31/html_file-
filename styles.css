@@ -96,10 +96,10 @@ body {
     min-width: var(--sidebar-width);
 }
 
-/* Sidebar Footer */
+/* Sidebar Top Tabs */
 .sidebar-footer {
     display: flex;
-    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     background-color: var(--bg-secondary);
     min-width: var(--sidebar-width);
 }
