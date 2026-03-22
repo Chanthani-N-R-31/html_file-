@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             if (imgFile) {
-                flowchartImage.src = imgFile;
+                flowchartImage.src = encodeURI(imgFile);
             } else {
                 // Using a high-resolution placeholder with realistic dimensions (1920x1080)
                 const urlText = flowName.replace(/\s+/g, '+');
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (newImg) {
                 flowchartImage.style.opacity = '0';
                 setTimeout(() => {
-                    flowchartImage.src = newImg;
+                    flowchartImage.src = encodeURI(newImg);
                     flowchartImage.onload = () => {
                         flowchartImage.style.opacity = '1';
                     };
